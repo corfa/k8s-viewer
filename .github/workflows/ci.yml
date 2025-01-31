@@ -1,0 +1,27 @@
+name: Lint Code with flake8
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  lint:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install flake8
+
+      - name: Run flake8 on viewer_app/
+        run: |
+          flake8 viewer_app/
