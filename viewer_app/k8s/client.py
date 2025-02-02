@@ -1,9 +1,9 @@
 from typing import Protocol
 
-from clients.schemas.deployment import Deployment
+from k8s.schemas import Deployment
 
 
-class BaseClient(Protocol):
+class K8sClient(Protocol):
 
     def __init__(self, settings: any) -> None:
         ...

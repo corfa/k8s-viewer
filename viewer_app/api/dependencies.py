@@ -1,18 +1,18 @@
 from fastapi import Depends
 
-from services.cluster_k8s_service import ClusterK8sService
-from clients import k8s_clients, fake_client
-from clients.base_client import BaseClient
+from services.k8s_cluster import KubeService
+from k8s import fake, kube
+from k8s.client import K8sClient
 from core.config import k8s_settings
 
 
-def get_k8s_client() -> BaseClient:
+def get_k8s_client() -> K8sClient:
     if k8s_settings.use_fake_client:
-        return fake_client.FakeClients(k8s_settings)
+        return fake.FakeK8sClient(k8s_settings)
     else:
-        return k8s_clients.K8sClients(k8s_settings)
+        return kube.KubernetesK8sClient(k8s_settings)
 
 
-def get_k8s_service(client: BaseClient = Depends(get_k8s_client)):
+def get_k8s_service(client: K8sClient = Depends(get_k8s_client)) -> KubeService:
 
-    return ClusterK8sService(client)
+    return KubeService(client)

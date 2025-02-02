@@ -2,12 +2,12 @@ from kubernetes import client as k8s_client, config as k8s_config
 from kubernetes.client.api.apps_v1_api import AppsV1Api
 from kubernetes.client.api.batch_v1_api import BatchV1Api
 
-from clients.base_client import BaseClient
+from k8s.client import K8sClient
 from core.config import K8sSettings
-from clients.schemas.deployment import Deployment, Environment
+from k8s.schemas import Deployment, Environment
 
 
-class K8sClients(BaseClient):
+class KubernetesK8sClient(K8sClient):
 
     def __init__(self, settings_k8s: K8sSettings) -> None:
         self.settings_k8s = settings_k8s
@@ -25,12 +25,11 @@ class K8sClients(BaseClient):
         return k8s_client
 
     def get_deployments(self, namespace: str | None = None) -> list[Deployment]:
-        print(type(self._apps_v1))
-        print(type(self._batch_v1))
         if namespace:
             data: dict = self._apps_v1.list_namespaced_deployment(namespace=namespace).to_dict()
         else:
             data: dict = self._apps_v1.list_deployment_for_all_namespaces().to_dict()
+
         deployements_list = []
         for item in data.get('items'):
             image = item['spec']['template']['spec']['containers'][0]['image']
