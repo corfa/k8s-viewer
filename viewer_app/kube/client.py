@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from k8s.schemas import Deployment
+from kube.schemas import Deployment
 
 
 class K8sClient(Protocol):
