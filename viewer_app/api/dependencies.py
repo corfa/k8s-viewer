@@ -1,9 +1,19 @@
 from fastapi import Depends
 
 from services.k8s_cluster import KubeService
-from k8s import fake, kube
-from k8s.client import K8sClient
+from kube import fake, kube
+from kube.client import K8sClient
 from core.config import k8s_settings
+from repositories.deployment_repo import DeploymentRepository
+from repositories.service_db import DbService
+
+
+def get_deployments_repositories() -> DeploymentRepository:
+    return DeploymentRepository()
+
+
+def get_db_service(deployment_repo: DeploymentRepository = Depends(get_deployments_repositories)):
+    return DbService(deployment_repo)
 
 
 def get_k8s_client() -> K8sClient:

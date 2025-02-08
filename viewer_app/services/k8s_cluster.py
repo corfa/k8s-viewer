@@ -1,6 +1,6 @@
 from services.k8s_service import K8sSerivce
-from k8s.client import K8sClient
-from k8s.schemas import Deployment as k8sDeployment
+from kube.client import K8sClient
+from kube.schemas import Deployment as k8sDeployment
 from services.domain.deployments import Deployment, DeploymentsSnapshot
 
 

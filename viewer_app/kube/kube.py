@@ -2,9 +2,9 @@ from kubernetes import client as k8s_client, config as k8s_config
 from kubernetes.client.api.apps_v1_api import AppsV1Api
 from kubernetes.client.api.batch_v1_api import BatchV1Api
 
-from k8s.client import K8sClient
+from kube.client import K8sClient
 from core.config import K8sSettings
-from k8s.schemas import Deployment, Environment
+from kube.schemas import Deployment, Environment
 
 
 class KubernetesK8sClient(K8sClient):
