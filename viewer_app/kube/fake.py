@@ -1,8 +1,8 @@
 import random
 
-from k8s.client import K8sClient
+from kube.client import K8sClient
 from core.config import K8sSettings
-from k8s.schemas import Deployment, Environment
+from kube.schemas import Deployment, Environment
 
 
 def create_test_deployment() -> Deployment:

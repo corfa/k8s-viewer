@@ -3,11 +3,12 @@ from datetime import datetime
 
 
 class Deployment(BaseModel):
+    id: int = None
     image: str
-    envs: list[dict]
+    envs: list[dict] = []
 
 
-class DeploymentsSnapshot(BaseModel):
+class DeploymentsSnapshotCluster(BaseModel):
     deployments: list[Deployment]
     namespaces: str = "all-namespaces"
     count: int = 0
