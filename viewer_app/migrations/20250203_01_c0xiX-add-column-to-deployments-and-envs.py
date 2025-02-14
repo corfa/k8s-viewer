@@ -6,7 +6,7 @@ steps = [
     step("""
         CREATE TABLE deployments (
             id SERIAL PRIMARY KEY,
-            namespace VARCHAR(255) DEFAULT 'all-namespaces'
+            namespace VARCHAR(255) DEFAULT 'all-namespaces',
             image VARCHAR(255),
             time_response TIMESTAMP
         );
